@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# 01_setState
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## setState更新狀態的2種寫法
 
-## Available Scripts
+### 寫法(1)
 
-In the project directory, you can run:
+```jsx
+setState(stateChange, [callback]) // 物件式的setState
+```
 
-### `npm start`
+1. stateChange為狀態改變物件(該物件可以體現出狀態的更改)
+2. callback是可選的回呼函數, 它在狀態更新完畢、介面也更新後(render調用後)才被調用
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 寫法(2)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```jsx
+setState(updater, [callback]) // 函數式的setState
+```
 
-### `npm test`
+1. updater為返回stateChange物件的函數。
+2. updater可以接收到state和props。
+3. callback是可選的回呼函數, 它在狀態更新、介面也更新後(render調用後)才被調用。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 總結:
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. 物件式的setState是函數式的setState的簡寫方式(語法糖)
+2. 使用原則：
+    - 如果新狀態不依賴于原狀態 ===> 使用物件方式
+    - 如果新狀態依賴于原狀態 ===> 使用函數方式
+    - 如果需要在setState()執行後獲取最新的狀態資料,要在第二個callback函數中讀取
